@@ -28,9 +28,21 @@ namespace OptionStrict.oEmbed
             Url = url;
             MaxWidth = maxWidth;
             MaxHeight = maxHeight;
-            Format = format;
+            SetFormat(api, format);
             QueryParameters = queryParameters??new NameValueCollection();
             UserAgent = userAgent;
+        }
+
+        private void SetFormat(string api, oEmbedFormat format)
+        {
+            if (Format != oEmbedFormat.Unspecified) return;
+            oEmbedFormat derivedFormat;
+            var index = api.LastIndexOf(".");
+            if (index>=0);
+            {
+                derivedFormat = api.Substring(index+1).GetOEmbedFormat();
+            }
+            Format = derivedFormat != oEmbedFormat.Unspecified ? derivedFormat : format;
         }
 
         public oEmbedRequest(string api, string url)
@@ -38,7 +50,7 @@ namespace OptionStrict.oEmbed
             Api = api;
             Url = url;
             QueryParameters = new NameValueCollection();
-            Format = oEmbedFormat.Json;
+            SetFormat(api, oEmbedFormat.Json);
         }
 
         public override string ToString()
@@ -62,7 +74,8 @@ namespace OptionStrict.oEmbed
         {
             foreach (var key in queryString.AllKeys)
             {
-                if (key.ToLower().In("api","url")) continue;
+                SetFormat(Api, (queryString["format"]??"").GetOEmbedFormat());
+                if (key.ToLower().In("api","url","format")) continue;
                 var index = key;
                 var propertyInfos = GetType().GetProperties();
                 var property = propertyInfos
