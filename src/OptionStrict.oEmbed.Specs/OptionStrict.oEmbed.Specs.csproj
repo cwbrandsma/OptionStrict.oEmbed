@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateFromUri\when_creating_oembed_request_from_uri_and_api_contains_xml_format.cs" />
+    <Compile Include="CreateFromUri\when_creating_oembed_request_from_uri_and_api_contains_xml_format_but_querystring_contains_json.cs" />
     <Compile Include="oEmbedReaderTestBase.cs" />
+    <Compile Include="CreateFromUri\when_creating_oembed_request_from_uri.cs" />
     <Compile Include="When_Reading_Live_Sources.cs" />
     <Compile Include="When_Response_Is_Json.cs" />
     <Compile Include="When_Response_Is_Link.cs" />
