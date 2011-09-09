@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Web;
 
 namespace OptionStrict.oEmbed
 {
@@ -15,6 +16,11 @@ namespace OptionStrict.oEmbed
         public oEmbedFormat Format { get; set; }
         public NameValueCollection QueryParameters { get; set; }
         public string UserAgent { get; set; }
+        public string Callback { get; set; }
+
+        private oEmbedRequest()
+        {
+        }
 
         public oEmbedRequest(string api, string url, int? maxWidth, int? maxHeight, oEmbedFormat format, NameValueCollection queryParameters, string userAgent)
         {
@@ -33,10 +39,6 @@ namespace OptionStrict.oEmbed
             Url = url;
             QueryParameters = new NameValueCollection();
             Format = oEmbedFormat.Json;
-        }
-
-        private oEmbedRequest()
-        {
         }
 
         public override string ToString()
@@ -85,6 +87,5 @@ namespace OptionStrict.oEmbed
             }
             return value;
         }
-
     }
 }
