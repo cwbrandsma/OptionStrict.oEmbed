@@ -7,8 +7,7 @@ namespace OptionStrict.oEmbed.MVC
     {
         public static oEmbed oEmbed(this HtmlHelper helper, string api, string url)
         {
-            var oEmbedReader = DependencyResolver.Current.GetService<IoEmbedReader>();
-
+            var oEmbedReader = new oEmbedReader();
             if (oEmbedReader == null)
                 throw new NullOEmbedReaderException();
 
@@ -17,7 +16,7 @@ namespace OptionStrict.oEmbed.MVC
 
         public static oEmbed oEmbed(this HtmlHelper helper, oEmbedRequest request)
         {
-            var oEmbedReader = DependencyResolver.Current.GetService<IoEmbedReader>();
+            var oEmbedReader = new oEmbedReader();
 
             if (oEmbedReader == null)
                 throw new NullOEmbedReaderException();
